@@ -1,45 +1,8 @@
-<p align="center">
-<img src="https://images.gitee.com/uploads/images/2019/0626/231046_f44892b9_709883.png" border="0" />
-
-</p>
-
-<p align="center">
-	<strong>一个基于springboot的快速集成多数据源的启动器</strong>
-</p>
-
-<p align="center">
-    <a >
-        <img src="https://github.com/baomidou/dynamic-datasource-spring-boot-starter/workflows/CodeQL/badge.svg?branch=master" >
-    </a>
-   <a>
-        <img src="https://badgen.net/github/stars/baomidou/dynamic-datasource-spring-boot-starter" >
-    </a>
-    <a href="https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter" target="_blank">
-        <img src="https://img.shields.io/maven-central/v/com.baomidou/dynamic-datasource-spring-boot-starter.svg" >
-    </a>
-    <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">
-        <img src="https://img.shields.io/:license-apache-brightgreen.svg" >
-    </a>
-    <a>
-        <img src="https://img.shields.io/badge/JDK-1.7+-green.svg" >
-    </a>
-    <a>
-        <img src="https://img.shields.io/badge/springBoot-1.5.x__2.x.x-green.svg" >
-    </a>
-    <a href="https://www.jetbrains.com">
-        <img src="https://img.shields.io/badge/IntelliJ%20IDEA-support-blue.svg" >
-    </a>
-    <a>
-        <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" >
-    </a>
-    <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ded31006508b57d2d732c81266dd2c26e33283f84464e2c294309d90b9674992"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="dynamic-sring-boot-starter" title="dynamic-sring-boot-starter"></a>
-</p>
-
 # 简介
 
 dynamic-datasource-spring-boot-starter 是一个基于springboot的快速集成多数据源的启动器。
 
-其支持 **Jdk 1.7+, SpringBoot 1.4.x 1.5.x 2.x.x**。
+其支持 **Jdk 1.8+, SpringBoot 1.4.x 1.5.x 2.x.x**。
 
 ## 文档 | Documentation
 
