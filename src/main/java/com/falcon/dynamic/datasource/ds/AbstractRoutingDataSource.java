@@ -1,18 +1,3 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource.ds;
 
 import com.falcon.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
@@ -28,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  * 抽象动态获取数据源
- *
+ * 重写了spring的 getConnection 方法
  * @author falcon
  * @since 2.2.0
  */
@@ -43,6 +28,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
+        //判断是否使用了事物
         String xid = TransactionContext.getXID();
         if (StringUtils.isEmpty(xid)) {
             return determineDataSource().getConnection();

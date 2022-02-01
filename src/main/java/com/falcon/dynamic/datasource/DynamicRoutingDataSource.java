@@ -1,18 +1,3 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource;
 
 import com.falcon.dynamic.datasource.ds.AbstractRoutingDataSource;
@@ -44,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 核心动态数据源组件
  *
- * @author falcon Kanyuxia
+ * @author falcon 
  * @since 1.0.0
  */
 @Slf4j
@@ -72,12 +57,19 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
     @Setter
     private Boolean seata = false;
 
+    /**
+     * 确定使用数据源
+     * @return
+     */
     @Override
     public DataSource determineDataSource() {
         String dsKey = DynamicDataSourceContextHolder.peek();
         return getDataSource(dsKey);
     }
-
+    /**
+     * 确定主数据源
+     * @return
+     */
     private DataSource determinePrimaryDataSource() {
         log.debug("dynamic-datasource switch to the primary datasource");
         DataSource dataSource = dataSourceMap.get(primary);
@@ -116,15 +108,18 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
      * @return 数据源
      */
     public DataSource getDataSource(String ds) {
+        //没有传入数据源名称 就是没有加ds注解 默认使用主数据源
         if (StringUtils.isEmpty(ds)) {
             return determinePrimaryDataSource();
         } else if (!groupDataSources.isEmpty() && groupDataSources.containsKey(ds)) {
             log.debug("dynamic-datasource switch to the datasource named [{}]", ds);
+            //动态数据源切换到名为的数据源
             return groupDataSources.get(ds).determineDataSource();
         } else if (dataSourceMap.containsKey(ds)) {
             log.debug("dynamic-datasource switch to the datasource named [{}]", ds);
             return dataSourceMap.get(ds);
         }
+        //如果启用严格模式 没有找到数据源会抛出异常 没有启用的化默认使用主数据源
         if (strict) {
             throw new CannotFindDataSourceException("dynamic-datasource could not find a datasource named" + ds);
         }
@@ -251,7 +246,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
     }
 
     /**
-     * close db
+     * 关闭数据源
      *
      * @param ds         dsName
      * @param dataSource db

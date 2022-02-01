@@ -1,18 +1,3 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource.aop;
 
 import lombok.NonNull;
@@ -37,6 +22,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
+ * @DS注解拦截器
  * @author falcon
  * @since 1.2.0
  */
@@ -73,13 +59,14 @@ public class DynamicDataSourceAnnotationAdvisor extends AbstractPointcutAdvisor 
     }
 
     private Pointcut buildPointcut() {
+        //拦截加了DS注解的类或方法
         Pointcut cpc = new AnnotationMatchingPointcut(annotation, true);
         Pointcut mpc = new AnnotationMethodPoint(annotation);
         return new ComposablePointcut(cpc).union(mpc);
     }
 
     /**
-     * In order to be compatible with the spring lower than 5.0
+     * 兼容spring 5以下版本
      */
     private static class AnnotationMethodPoint implements Pointcut {
 
@@ -112,11 +99,11 @@ public class DynamicDataSourceAnnotationAdvisor extends AbstractPointcutAdvisor 
                 if (matchesMethod(method)) {
                     return true;
                 }
-                // Proxy classes never have annotations on their redeclared methods.
+                // 代理类从不对其重新声明的方法进行注释.
                 if (Proxy.isProxyClass(targetClass)) {
                     return false;
                 }
-                // The method may be on an interface, so let's check on the target class as well.
+                // T他的方法可能在一个接口上，所以让我们也检查一下目标类.
                 Method specificMethod = AopUtils.getMostSpecificMethod(method, targetClass);
                 return (specificMethod != method && matchesMethod(specificMethod));
             }

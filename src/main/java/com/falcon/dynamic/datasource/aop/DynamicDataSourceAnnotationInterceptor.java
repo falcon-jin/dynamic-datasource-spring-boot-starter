@@ -1,18 +1,3 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource.aop;
 
 import com.falcon.dynamic.datasource.processor.DsProcessor;
@@ -22,7 +7,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * Core Interceptor of Dynamic Datasource
+ * 多数据的核心拦截器
  *
  * @author falcon
  * @since 1.2.0
@@ -30,7 +15,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor {
 
     /**
-     * The identification of SPEL.
+     * SPEL的识别前缀
      */
     private static final String DYNAMIC_PREFIX = "#";
 
@@ -44,15 +29,23 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
+        //获取数据源名称
         String dsKey = determineDatasourceKey(invocation);
+        //将当前线程使用的数据源按照执行顺序保存下来
         DynamicDataSourceContextHolder.push(dsKey);
         try {
             return invocation.proceed();
         } finally {
+            //当前方法执行结束 弹出数据源
             DynamicDataSourceContextHolder.poll();
         }
     }
 
+    /**
+     * 确定使用哪个数据源
+     * @param invocation 加了ds注解的方法
+     * @return
+     */
     private String determineDatasourceKey(MethodInvocation invocation) {
         String key = dataSourceClassResolver.findKey(invocation.getMethod(), invocation.getThis());
         return key.startsWith(DYNAMIC_PREFIX) ? dsProcessor.determineDatasource(invocation, key) : key;

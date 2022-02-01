@@ -233,19 +233,23 @@
         </profile>
     </profiles>
 
-    <repositories>
+    <distributionManagement>
         <repository>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>rdc-releases</id>
+            <url>https://packages.aliyun.com/maven/repository/2183109-release-2dynHK/</url>
         </repository>
-    </repositories>
-
+        <snapshotRepository>
+            <id>rdc-snapshots</id>
+            <url>https://packages.aliyun.com/maven/repository/2183109-snapshot-jHqyyp/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
 

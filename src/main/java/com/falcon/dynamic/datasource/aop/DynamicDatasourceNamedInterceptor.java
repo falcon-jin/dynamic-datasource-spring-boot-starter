@@ -1,18 +1,3 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource.aop;
 
 
@@ -33,7 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Named Interceptor of Dynamic Datasource
+ * 动态数据源的命名拦截器
  *
  * @author falcon
  * @since 3.4.0
@@ -62,10 +47,10 @@ public class DynamicDatasourceNamedInterceptor implements MethodInterceptor {
     }
 
     /**
-     * add Item Pattern
+     * 添加方法使用的数据源
      *
-     * @param methodName like select*
-     * @param dsKey      like master or slave
+     * @param methodName 方法名称 例如 select*
+     * @param dsKey 数据源名称     例如 master or slave
      */
     public void addPattern(@Nonnull String methodName, @Nonnull String dsKey) {
         log.debug("dynamic-datasource adding ds method [" + methodName + "] with attribute [" + dsKey + "]");
@@ -73,7 +58,7 @@ public class DynamicDatasourceNamedInterceptor implements MethodInterceptor {
     }
 
     /**
-     * add PatternMap
+     * 添加 PatternMap
      *
      * @param map namedMap
      */
@@ -120,12 +105,12 @@ public class DynamicDatasourceNamedInterceptor implements MethodInterceptor {
             return null;
         }
 
-        // Look for direct name match.
+        // 寻找直接名称匹配。
         String methodName = method.getName();
         String dsKey = this.nameMap.get(methodName);
 
         if (dsKey == null) {
-            // Look for most specific name match.
+            //寻找最具体的名称匹配。
             String bestNameMatch = null;
             for (String mappedName : this.nameMap.keySet()) {
                 boolean match1 = isMatch(methodName, mappedName);

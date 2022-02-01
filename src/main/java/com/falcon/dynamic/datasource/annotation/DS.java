@@ -1,27 +1,13 @@
-/*
- * Copyright © 2018 organization baomidou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.falcon.dynamic.datasource.annotation;
 
 
 import java.lang.annotation.*;
 
 /**
- * The core Annotation to switch datasource. It can be annotated at class or method.
- *
- * @author falcon Kanyuxia
+ * 切换数据源的核心注释。
+ * 注解加在service类上或方法上 (保证一个service下通过ioc注入的mapper属于同一个数据源)
+ * 加在mapper上会导致数据源切换失败
+ * @author falcon
  * @since 1.0.0
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
@@ -30,7 +16,7 @@ import java.lang.annotation.*;
 public @interface DS {
 
     /**
-     * groupName or specific database name or spring SPEL name.
+     * groupName 或特定的数据库名称或 spring SPEL 名称。
      *
      * @return the database you want to switch
      */
