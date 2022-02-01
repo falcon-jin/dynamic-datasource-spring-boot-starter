@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 /**
  * 多数据源连接池创建事件
  *
- * @author TaoYu
+ * @author falcon
  * @since 3.5.0
  */
 public interface DataSourceInitEvent {

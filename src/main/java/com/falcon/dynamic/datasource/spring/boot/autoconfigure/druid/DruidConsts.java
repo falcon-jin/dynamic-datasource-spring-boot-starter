@@ -18,7 +18,7 @@ package com.falcon.dynamic.datasource.spring.boot.autoconfigure.druid;
 /**
  * Druid 配置属性
  *
- * @author TaoYu
+ * @author falcon
  * @since 2020/1/27
  */
 public interface DruidConsts {

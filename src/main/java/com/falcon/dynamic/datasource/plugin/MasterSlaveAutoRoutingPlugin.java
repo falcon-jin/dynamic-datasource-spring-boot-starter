@@ -34,7 +34,7 @@ import java.util.Properties;
 /**
  * Master-slave Separation Plugin with mybatis
  *
- * @author TaoYu
+ * @author falcon
  * @since 2.5.1
  */
 @Intercepts({

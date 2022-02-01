@@ -18,7 +18,7 @@ package com.falcon.dynamic.datasource.exception;
 /**
  * exception when  druid dataSource init failed
  *
- * @author TaoYu
+ * @author falcon
  * @since 2.5.6
  */
 public class ErrorCreateDataSourceException extends RuntimeException {

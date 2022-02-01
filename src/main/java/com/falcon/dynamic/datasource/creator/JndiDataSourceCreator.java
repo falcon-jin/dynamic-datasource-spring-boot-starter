@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 /**
  * JNDI数据源创建器
  *
- * @author TaoYu
+ * @author falcon
  * @since 2020/1/27
  */
 public class JndiDataSourceCreator extends AbstractDataSourceCreator implements DataSourceCreator {

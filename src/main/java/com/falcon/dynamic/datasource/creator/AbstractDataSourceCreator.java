@@ -36,7 +36,7 @@ import javax.sql.DataSource;
  * <p>
  * 这里主要处理一些公共逻辑，如脚本和事件等
  *
- * @author TaoYu
+ * @author falcon
  */
 @Slf4j
 public abstract class AbstractDataSourceCreator implements DataSourceCreator {

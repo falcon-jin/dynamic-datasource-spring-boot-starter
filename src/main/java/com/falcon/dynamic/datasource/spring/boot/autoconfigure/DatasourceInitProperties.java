@@ -20,7 +20,7 @@ import lombok.Data;
 /**
  * 动态数据源初始化脚本配置
  *
- * @author TaoYu
+ * @author falcon
  * @since 3.5.0
  */
 @Data

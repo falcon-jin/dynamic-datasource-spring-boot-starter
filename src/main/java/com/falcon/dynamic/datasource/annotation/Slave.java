@@ -18,7 +18,7 @@ package com.falcon.dynamic.datasource.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author TaoYu
+ * @author falcon
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

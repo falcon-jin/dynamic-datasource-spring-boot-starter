@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Random strategy to switch a database
  *
- * @author TaoYu Kanyuxia
+ * @author falcon Kanyuxia
  * @since 1.0.0
  */
 public class RandomDynamicDataSourceStrategy implements DynamicDataSourceStrategy {

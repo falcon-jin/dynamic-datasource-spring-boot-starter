@@ -22,7 +22,7 @@ import java.util.Properties;
 /**
  * BeeCp参数配置
  *
- * @author TaoYu
+ * @author falcon
  * @since 3.3.4
  */
 @Data

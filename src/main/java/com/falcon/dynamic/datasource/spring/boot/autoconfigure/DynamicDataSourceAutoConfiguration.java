@@ -55,7 +55,7 @@ import java.util.List;
 /**
  * 动态数据源核心自动配置类
  *
- * @author TaoYu Kanyuxia
+ * @author falcon Kanyuxia
  * @see DynamicDataSourceProvider
  * @see DynamicDataSourceStrategy
  * @see DynamicRoutingDataSource

@@ -24,7 +24,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * Core Interceptor of Dynamic Datasource
  *
- * @author TaoYu
+ * @author falcon
  * @since 1.2.0
  */
 public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor {

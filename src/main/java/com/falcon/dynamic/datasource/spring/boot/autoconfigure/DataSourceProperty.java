@@ -27,7 +27,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import javax.sql.DataSource;
 
 /**
- * @author TaoYu
+ * @author falcon
  * @since 1.2.0
  */
 @Slf4j

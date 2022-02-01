@@ -26,7 +26,7 @@ import static com.falcon.dynamic.datasource.spring.boot.autoconfigure.druid.Drui
 /**
  * Druid参数配置
  *
- * @author TaoYu
+ * @author falcon
  * @since 1.2.0
  */
 @Data

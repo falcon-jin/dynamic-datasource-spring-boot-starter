@@ -23,7 +23,7 @@ import java.util.Properties;
 /**
  * HikariCp参数配置
  *
- * @author TaoYu
+ * @author falcon
  * @since 2.4.1
  */
 @Data

@@ -18,7 +18,7 @@ package com.falcon.dynamic.datasource.enums;
 /**
  * Seata 支持的模式枚举
  *
- * @author TaoYu
+ * @author falcon
  */
 public enum SeataMode {
     /**
