@@ -17,23 +17,57 @@ import static com.falcon.dynamic.datasource.spring.boot.autoconfigure.druid.Drui
 @Data
 @Slf4j
 public class DruidConfig {
-
+    /**
+     * 初始化时池中建立的物理连接个数
+     */
     private Integer initialSize;
+    /**
+     * 最大的可活跃的连接池数量
+     */
     private Integer maxActive;
     private Integer minIdle;
+    /**
+     * 获取连接时最大等待时间，单位毫秒，超过连接就会失效。配置了maxWait之后，
+     * 缺省启用公平锁，并发效率会有所下降，
+     * 如果需要可以通过配置useUnfairLock属性为true使用非公平锁
+     */
     private Integer maxWait;
+    /**
+     * 连接回收器的运行周期时间，时间到了清理池中空闲的连接，
+     * testWhileIdle根据这个判断 3600000
+     */
     private Long timeBetweenEvictionRunsMillis;
     private Long timeBetweenLogStatsMillis;
     private Integer statSqlMaxSize;
+    /**
+     * 把空闲时间超过minEvictableIdleTimeMillis毫秒的连接断开,
+     * 直到连接池中的连接数到minIdle为止 连接池中连接可空闲的时间
+     */
     private Long minEvictableIdleTimeMillis;
     private Long maxEvictableIdleTimeMillis;
     private String defaultCatalog;
     private Boolean defaultAutoCommit;
     private Boolean defaultReadOnly;
     private Integer defaultTransactionIsolation;
+    /**
+     * 建议配置为true，不影响性能，并且保证安全性。 申请连接的时候检测，
+     * 如果空闲时间大于timeBetweenEvictionRunsMillis，
+     * 执行validationQuery检测连接是否有效。
+     */
     private Boolean testWhileIdle;
+    /**
+     * 申请连接时执行validationQuery检测连接是否有效，
+     * 做了这个配置会降低性能。设置为false
+     */
     private Boolean testOnBorrow;
+    /**
+     * 归还连接时执行validationQuery检测连接是否有效，
+     * 做了这个配置会降低性能,设置为flase
+     */
     private Boolean testOnReturn;
+    /**
+     * 用来检测连接是否有效的sql，要求是一个查询语句
+     */
     private String validationQuery;
     private Integer validationQueryTimeout;
     private Boolean useGlobalDataSourceStat;
@@ -46,19 +80,35 @@ public class DruidConfig {
     private Boolean failFast;
     private Long phyTimeoutMillis;
     private Boolean keepAlive;
+    /**
+     * 是否缓存preparedStatement，也就是PSCache
+     * PSCache对支持游标的数据库性能提升巨大，比如说oracle。
+     */
     private Boolean poolPreparedStatements;
     private Boolean initVariants;
     private Boolean initGlobalVariants;
     private Boolean useUnfairLock;
     private Boolean killWhenSocketReadTimeout;
     private Properties connectionProperties;
+    /**
+     * 要启用PSCache，必须配置大于0，当大于0时，
+     * poolPreparedStatements自动触发修改为true。在Druid中，
+     * 不会存在Oracle下PSCache占用内存过多的问题，
+     * 可以把这个数值配置大一些，比如说100
+     */
     private Integer maxPoolPreparedStatementPerConnectionSize;
     private String initConnectionSqls;
     private Boolean sharePreparedStatements;
     private Integer connectionErrorRetryAttempts;
     private Boolean breakAfterAcquireFailure;
+    /**
+     * 是否自动回收超时连接,生产环境最好去掉，开发环境配置是为了更好的发现问题
+     */
     private Boolean removeAbandoned;
     private Integer removeAbandonedTimeoutMillis;
+    /**
+     * 是否在自动回收超时连接的时候打印连接的超时错误
+     */
     private Boolean logAbandoned;
     private Integer queryTimeout;
     private Integer transactionQueryTimeout;
