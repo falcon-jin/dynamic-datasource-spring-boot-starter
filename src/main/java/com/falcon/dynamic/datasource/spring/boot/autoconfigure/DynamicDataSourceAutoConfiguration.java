@@ -70,6 +70,10 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
         return new YmlDynamicDataSourceProvider(properties.getDatasource());
     }
 
+    /**
+     * 配置数据源
+     * @return
+     */
     @Bean
     @ConditionalOnMissingBean
     public DataSource dataSource() {
@@ -82,31 +86,11 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
         return dataSource;
     }
 
-    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    @Bean
-    @ConditionalOnProperty(prefix = DynamicDataSourceProperties.PREFIX + ".aop", name = "enabled", havingValue = "true", matchIfMissing = true)
-    public Advisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
-        DynamicDatasourceAopProperties aopProperties = properties.getAop();
-        DynamicDataSourceAnnotationInterceptor interceptor = new DynamicDataSourceAnnotationInterceptor(aopProperties.getAllowedPublicOnly(), dsProcessor);
-        DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor, DS.class);
-        advisor.setOrder(aopProperties.getOrder());
-        return advisor;
-    }
-
-    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    @Bean
-    @ConditionalOnProperty(prefix = DynamicDataSourceProperties.PREFIX, name = "seata", havingValue = "false", matchIfMissing = true)
-    public Advisor dynamicTransactionAdvisor() {
-        DynamicLocalTransactionInterceptor interceptor = new DynamicLocalTransactionInterceptor();
-        return new DynamicDataSourceAnnotationAdvisor(interceptor, DSTransactional.class);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public DataSourceInitEvent dataSourceInitEvent() {
-        return new EncDataSourceInitEvent();
-    }
-
+    /**
+     * 配置数据源切点
+     * @param beanFactory
+     * @return
+     */
     @Bean
     @ConditionalOnMissingBean
     public DsProcessor dsProcessor(BeanFactory beanFactory) {
@@ -118,6 +102,46 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
         sessionProcessor.setNextProcessor(spelExpressionProcessor);
         return headerProcessor;
     }
+
+    /**
+     * 配置数据源切面
+     * @param dsProcessor
+     * @return
+     */
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    @Bean
+    @ConditionalOnProperty(prefix = DynamicDataSourceProperties.PREFIX + ".aop", name = "enabled", havingValue = "true", matchIfMissing = true)
+    public Advisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
+        DynamicDatasourceAopProperties aopProperties = properties.getAop();
+        DynamicDataSourceAnnotationInterceptor interceptor = new DynamicDataSourceAnnotationInterceptor(aopProperties.getAllowedPublicOnly(), dsProcessor);
+        DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor, DS.class);
+        advisor.setOrder(aopProperties.getOrder());
+        return advisor;
+    }
+
+    /**
+     * 配置事务拦截 加了@DSTransactional 注解
+     * @return
+     */
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    @Bean
+    @ConditionalOnProperty(prefix = DynamicDataSourceProperties.PREFIX, name = "seata", havingValue = "false", matchIfMissing = true)
+    public Advisor dynamicTransactionAdvisor() {
+        DynamicLocalTransactionInterceptor interceptor = new DynamicLocalTransactionInterceptor();
+        return new DynamicDataSourceAnnotationAdvisor(interceptor, DSTransactional.class);
+    }
+
+    /**
+     *  多数据源连接池创建事件 可以自定义 在数据源创建前、后·做一些处理
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public DataSourceInitEvent dataSourceInitEvent() {
+        return new EncDataSourceInitEvent();
+    }
+
+
 
     @Override
     public void afterPropertiesSet() {

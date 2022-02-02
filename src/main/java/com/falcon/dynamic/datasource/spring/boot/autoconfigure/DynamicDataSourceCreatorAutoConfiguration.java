@@ -15,6 +15,8 @@ import org.springframework.core.annotation.Order;
 import java.util.List;
 
 /**
+ * 数据源创建管理
+ * 根据配置生成不同的数据连接池
  * @author falcon
  */
 @Configuration
