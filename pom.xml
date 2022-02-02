@@ -24,8 +24,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <mybatis.plus.version>3.4.3.4</mybatis.plus.version>
-        <hikariCp.version>2.4.13</hikariCp.version>
+       <!-- <mybatis.plus.version>3.4.3.4</mybatis.plus.version>-->
+        <mybatis.version>3.5.9</mybatis.version>
+
+        <hikariCp.version>4.0.3</hikariCp.version>
         <druid.version>1.2.8</druid.version>
         <beeCp.version>3.2.9</beeCp.version>
         <dbcp2.version>2.8.0</dbcp2.version>
@@ -53,15 +55,22 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
+ <!--       <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis.plus.version}</version>
             <optional>true</optional>
+        </dependency>-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP-java7</artifactId>
+            <artifactId>HikariCP</artifactId>
             <version>${hikariCp.version}</version>
             <optional>true</optional>
         </dependency>
